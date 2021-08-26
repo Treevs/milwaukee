@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+
+.weather-items {
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+.weather-item {
+  display: inline-block;
+  margin: 25px;
+}

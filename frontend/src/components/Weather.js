@@ -1,20 +1,29 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
+import WeatherItems from './WeatherItems';
+const axios = require('axios');
 
 function Weather(props) {
+  const [weather, setWeather] = useState([]);
 
-  function goToBudget() {
-    window.location.href ="/budget";
+
+  useEffect(() => {
+    getWeather();
+  }, []);
+
+  async function getWeather() {
+    axios.get('/api/weather')
+    .then((response) => {
+      console.log(response.data);
+      setWeather(response.data);
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
   }
-
   return (
-    <div className="dashboard-card flex-card budget-preview card">
-      <button className="btn" onClick={goToBudget}>Go to Budgeter</button>
-      <div>
-        {props.moneyRemaining &&
-        '$'+(props.moneyRemaining) + ' remaining this week '
-        }
-      </div>
+    <div className="">
+      <WeatherItems weather={weather}/>
     </div>
   )
 }
